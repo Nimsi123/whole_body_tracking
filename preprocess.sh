@@ -1,11 +1,23 @@
-cd scripts
 
 # data was pulled from the 
 # /home/nima/holosoma/src/holosoma_retargeting/demo_results
 # folder
 # the stuff from this folder is computed with the first step in holosoma retargeting
 
+# python scripts/csv_to_npz.py --input_file /home/nima/whole_body_tracking/csvs/smplh_ttg_test_1.csv --input_fps 30 --output_name smplh_ttg_test_1 --output_fps 50 --headless
+# python scripts/replay_npz.py --registry_name=ianc-uc-berkeley-org/wandb-registry-motions/smplh_ttg_test_1
 
-# python csv_to_npz.py --input_file /home/nima/whole_body_tracking/artifacts/motive_gameplay_ttg_test_1:v0/motion.csv --input_fps 30 --output_name motion --output_fps 50 --headless
+# python scripts/csv_to_npz.py --input_file /home/nima/whole_body_tracking/csvs/smplh_ttg_test_1.csv --input_fps 30 --output_name smplh_ttg_test_1 --output_fps 50 --headless
+# python scripts/replay_npz.py --registry_name=ianc-uc-berkeley-org/wandb-registry-motions/smplh_ttg_test_1
 
-# python replay_npz.py --registry_name=ianc-uc-berkeley-org/wandb-registry-motions/motion
+
+# python scripts/parallel_npz_to_csv.py
+
+# python scripts/csv_to_npz.py --input_file /home/nima/whole_body_tracking/csvs/-7lbDSIKUak_232930_233555_0_1_2_2_original.csv --input_fps 30 --output_name -7lbDSIKUak_232930_233555_0_1_2_2_original --output_fps 50 --headless
+# python scripts/replay_npz.py --registry_name=ianc-uc-berkeley-org/wandb-registry-motions/-7lbDSIKUak_232930_233555_0_1_2_2_original
+
+python scripts/csv_to_npz.py --input_file "/home/nima/whole_body_tracking/csvs/Take_2025-09-30_03.21.33_PM_part000_6_2_original.csv" --input_fps 30 --output_name motive_repeated --output_fps 50 --headless
+python scripts/replay_npz.py --registry_name=ianc-uc-berkeley-org/wandb-registry-motions/motive_repeated
+
+# python scripts/csv_to_npz.py --input_file "/home/nima/whole_body_tracking/csvs/Take_2025-09-30_03.38.11_PM_part000_9_2_original.csv" --input_fps 30 --output_name motive_repeated_5 --output_fps 50 --headless
+# python scripts/replay_npz.py --registry_name=ianc-uc-berkeley-org/wandb-registry-motions/motive_repeated_5
