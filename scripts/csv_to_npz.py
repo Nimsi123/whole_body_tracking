@@ -310,6 +310,11 @@ def run_simulator(sim: sim_utils.SimulationContext, scene: InteractiveScene, joi
                     ], axis=0)
 
             np.savez("/tmp/motion.npz", **log)
+            np.savez(f"/home/nima/whole_body_tracking/motions/{args_cli.output_name}.npz", **log)
+
+            # print("Goodbye")
+            # import sys
+            # sys.exit(0)
 
             import wandb
 

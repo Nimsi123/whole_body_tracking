@@ -3,8 +3,8 @@ import glob
 import shutil
 import os
 
-# motion_dir = "/home/nima/holosoma/src/holosoma_retargeting/demo_results_parallel/g1/robot_only/tt4d_mixtape/*.npz"
-motion_dir = "/home/nima/holosoma/src/holosoma_retargeting/demo_results_parallel/g1/robot_only/motive_gameplay/*.npz"
+motion_dir = "/home/nima/holosoma/src/holosoma_retargeting/demo_results_parallel/g1/robot_only/tt4d_mixtape/*.npz"
+# motion_dir = "/home/nima/holosoma/src/holosoma_retargeting/demo_results_parallel/g1/robot_only/motive_gameplay/*.npz"
 
 save_dir = "/home/nima/whole_body_tracking/csvs"
 if os.path.exists(save_dir):

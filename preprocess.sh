@@ -1,3 +1,4 @@
+conda activate beyondmimic
 
 # data was pulled from the 
 # /home/nima/holosoma/src/holosoma_retargeting/demo_results
@@ -11,13 +12,23 @@
 # python scripts/replay_npz.py --registry_name=ianc-uc-berkeley-org/wandb-registry-motions/smplh_ttg_test_1
 
 
-# python scripts/parallel_npz_to_csv.py
+python scripts/parallel_npz_to_csv.py
 
 # python scripts/csv_to_npz.py --input_file /home/nima/whole_body_tracking/csvs/-7lbDSIKUak_232930_233555_0_1_2_2_original.csv --input_fps 30 --output_name -7lbDSIKUak_232930_233555_0_1_2_2_original --output_fps 50 --headless
 # python scripts/replay_npz.py --registry_name=ianc-uc-berkeley-org/wandb-registry-motions/-7lbDSIKUak_232930_233555_0_1_2_2_original
 
-python scripts/csv_to_npz.py --input_file "/home/nima/whole_body_tracking/csvs/Take_2025-09-30_03.21.33_PM_part000_6_2_original.csv" --input_fps 30 --output_name motive_repeated --output_fps 50 --headless
-python scripts/replay_npz.py --registry_name=ianc-uc-berkeley-org/wandb-registry-motions/motive_repeated
+# python scripts/csv_to_npz.py --input_file "/home/nima/whole_body_tracking/csvs/Take_2025-09-30_03.21.33_PM_part000_6_2_original.csv" --input_fps 30 --output_name motive_repeated --output_fps 50 --headless
+# python scripts/replay_npz.py --registry_name=ianc-uc-berkeley-org/wandb-registry-motions/motive_repeated
 
 # python scripts/csv_to_npz.py --input_file "/home/nima/whole_body_tracking/csvs/Take_2025-09-30_03.38.11_PM_part000_9_2_original.csv" --input_fps 30 --output_name motive_repeated_5 --output_fps 50 --headless
 # python scripts/replay_npz.py --registry_name=ianc-uc-berkeley-org/wandb-registry-motions/motive_repeated_5
+
+python scripts/csv_to_npz.py --input_file "/home/nima/whole_body_tracking/csvs/-7lbDSIKUak_224590_225140_0_5_1_4_3_original.csv" --input_fps 30 --output_name smpl_extreme_2 --output_fps 50 --headless
+python scripts/replay_npz.py --registry_name=ianc-uc-berkeley-org/wandb-registry-motions/smpl_extreme_2
+
+
+# rm -rf /home/nima/whole_body_tracking/motions/
+# mkdir -p /home/nima/whole_body_tracking/motions/
+# for csv_file in /home/nima/whole_body_tracking/csvs/*.csv; do
+#     python scripts/csv_to_npz.py --input_file "$csv_file" --input_fps 30 --output_name $(basename "$csv_file" .csv) --output_fps 50 --headless
+# done
