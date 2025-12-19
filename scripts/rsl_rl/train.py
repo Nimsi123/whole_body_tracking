@@ -113,11 +113,14 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg | DirectMARLEnvCfg, agen
         registry_name += ":latest"
     import pathlib
 
-    import wandb
+    # import wandb
+    # wandb implementation
+    # api = wandb.Api()
+    # artifact = api.artifact(registry_name)
+    # env_cfg.commands.motion.motion_file = str(pathlib.Path(artifact.download()) / "motion.npz")
 
-    api = wandb.Api()
-    artifact = api.artifact(registry_name)
-    env_cfg.commands.motion.motion_file = str(pathlib.Path(artifact.download()) / "motion.npz")
+    motions_dir = "/home/nima/whole_body_tracking/motions"
+    env_cfg.commands.motion.motion_file = str(pathlib.Path(motions_dir) / f"{agent_cfg.run_name}.npz")
 
     # specify directory for logging experiments
     log_root_path = os.path.join("logs", "rsl_rl", agent_cfg.experiment_name)

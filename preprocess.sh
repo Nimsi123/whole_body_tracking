@@ -23,8 +23,13 @@ python scripts/parallel_npz_to_csv.py
 # python scripts/csv_to_npz.py --input_file "/home/nima/whole_body_tracking/csvs/Take_2025-09-30_03.38.11_PM_part000_9_2_original.csv" --input_fps 30 --output_name motive_repeated_5 --output_fps 50 --headless
 # python scripts/replay_npz.py --registry_name=ianc-uc-berkeley-org/wandb-registry-motions/motive_repeated_5
 
-python scripts/csv_to_npz.py --input_file "/home/nima/whole_body_tracking/csvs/-7lbDSIKUak_224590_225140_0_5_1_4_3_original.csv" --input_fps 30 --output_name smpl_extreme_2 --output_fps 50 --headless
-python scripts/replay_npz.py --registry_name=ianc-uc-berkeley-org/wandb-registry-motions/smpl_extreme_2
+# python scripts/csv_to_npz.py --input_file "/home/nima/whole_body_tracking/csvs/-7lbDSIKUak_224590_225140_0_5_1_4_3_original.csv" --input_fps 30 --output_name smpl_extreme_2 --output_fps 50 --headless
+# python scripts/replay_npz.py --registry_name=ianc-uc-berkeley-org/wandb-registry-motions/smpl_extreme_2
+
+
+# after SMPL trajectory filtering
+python scripts/csv_to_npz.py --input_file "/home/nima/whole_body_tracking/csvs/4deOUpU2sis_298361_298931_0_3_0_3_original.csv" --input_fps 30 --output_name smpl_extreme_filtered_0 --output_fps 50 --headless
+# python scripts/replay_npz.py --registry_name=ianc-uc-berkeley-org/wandb-registry-motions/smpl_extreme_2
 
 
 # rm -rf /home/nima/whole_body_tracking/motions/
