@@ -20,3 +20,8 @@
 python scripts/rsl_rl/train.py --task=Tracking-Flat-G1-v0 \
 --registry_name ianc-uc-berkeley-org/wandb-registry-motions/smpl_extreme_filtered_1 \
 --headless --logger wandb --log_project_name ttg --run_name smpl_extreme_filtered_1
+
+# no wandb
+python scripts/rsl_rl/train.py --task=Tracking-Flat-G1-v0 \
+--registry_name dummy_value \
+--headless --log_project_name ttg --run_name test
