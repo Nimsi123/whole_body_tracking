@@ -108,10 +108,10 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg | DirectMARLEnvCfg, agen
     env_cfg.seed = agent_cfg.seed
     env_cfg.sim.device = args_cli.device if args_cli.device is not None else env_cfg.sim.device
 
-    # # load the motion file from the wandb registry
-    # registry_name = args_cli.registry_name
-    # if ":" not in registry_name:  # Check if the registry name includes alias, if not, append ":latest"
-    #     registry_name += ":latest"
+    # load the motion file from the wandb registry
+    registry_name = args_cli.registry_name
+    if ":" not in registry_name:  # Check if the registry name includes alias, if not, append ":latest"
+        registry_name += ":latest"
 
     # import wandb
     # wandb implementation
@@ -154,13 +154,9 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg | DirectMARLEnvCfg, agen
     env = RslRlVecEnvWrapper(env)
 
     # create runner from rsl-rl
-    # runner = OnPolicyRunner(
-    #     env, agent_cfg.to_dict(), log_dir=log_dir, device=agent_cfg.device, registry_name=registry_name
-    # )
     runner = OnPolicyRunner(
-        env, agent_cfg.to_dict(), log_dir=log_dir, device=agent_cfg.device
+        env, agent_cfg.to_dict(), log_dir=log_dir, device=agent_cfg.device, registry_name=registry_name
     )
-
 
     # write git state to logs
     runner.add_git_repo_to_log(__file__)
