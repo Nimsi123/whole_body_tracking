@@ -40,7 +40,7 @@ class MotionOnPolicyRunner(OnPolicyRunner):
             attach_onnx_metadata(self.env.unwrapped, wandb.run.name, path=policy_path, filename=filename)
             wandb.save(policy_path + filename, base_path=os.path.dirname(policy_path))
 
-            # link the artifact registry to this run
-            if self.registry_name is not None:
-                wandb.run.use_artifact(self.registry_name)
-                self.registry_name = None
+            # # link the artifact registry to this run
+            # if self.registry_name is not None:
+            #     wandb.run.use_artifact(self.registry_name)
+            #     self.registry_name = None

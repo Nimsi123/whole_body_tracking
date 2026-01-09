@@ -29,7 +29,7 @@ upper_body_names = [
             "right_elbow_link",
             "right_wrist_yaw_link",
         ]
-use_upper_body_names = True
+use_upper_body_names = False
 
 def _get_body_indexes(command: MotionCommand, body_names: list[str] | None) -> list[int]:
     return [i for i, name in enumerate(command.cfg.body_names) if (body_names is None) or (name in body_names)]
