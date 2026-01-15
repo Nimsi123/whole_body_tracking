@@ -20,6 +20,7 @@ parser.add_argument(
 parser.add_argument("--num_envs", type=int, default=None, help="Number of environments to simulate.")
 parser.add_argument("--task", type=str, default=None, help="Name of the task.")
 parser.add_argument("--motion_file", type=str, default=None, help="Path to the motion file.")
+parser.add_argument("--resume_path", type=str, required=True, help="Path to the model checkpoint to resume from.")
 # append RSL-RL cli arguments
 cli_args.add_rsl_rl_args(parser)
 # append AppLauncher cli args
@@ -72,47 +73,16 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg | DirectMARLEnvCfg, agen
     log_root_path = os.path.join("logs", "rsl_rl", agent_cfg.experiment_name)
     log_root_path = os.path.abspath(log_root_path)
 
-    # if args_cli.wandb_path:
-    #     import wandb
-
-    #     run_path = args_cli.wandb_path
-
-    #     api = wandb.Api()
-    #     if "model" in args_cli.wandb_path:
-    #         run_path = "/".join(args_cli.wandb_path.split("/")[:-1])
-    #     wandb_run = api.run(run_path)
-    #     # loop over files in the run
-    #     files = [file.name for file in wandb_run.files() if "model" in file.name]
-    #     # files are all model_xxx.pt find the largest filename
-    #     if "model" in args_cli.wandb_path:
-    #         file = args_cli.wandb_path.split("/")[-1]
-    #     else:
-    #         file = max(files, key=lambda x: int(x.split("_")[1].split(".")[0]))
-
-    #     wandb_file = wandb_run.file(str(file))
-    #     wandb_file.download("./logs/rsl_rl/temp", replace=True)
-
-    #     print(f"[INFO]: Loading model checkpoint from: {run_path}/{file}")
-    #     resume_path = f"./logs/rsl_rl/temp/{file}"
-
-    #     if args_cli.motion_file is not None:
-    #         print(f"[INFO]: Using motion file from CLI: {args_cli.motion_file}")
-    #         env_cfg.commands.motion.motion_file = args_cli.motion_file
-
-    #     art = next((a for a in wandb_run.used_artifacts() if a.type == "motions"), None)
-    #     if art is None:
-    #         print("[WARN] No model artifact found in the run.")
-    #     else:
-    #         env_cfg.commands.motion.motion_file = str(pathlib.Path(art.download()) / "motion.npz")
-
-    # else:
-    #     print(f"[INFO] Loading experiment from directory: {log_root_path}")
-    #     resume_path = get_checkpoint_path(log_root_path, agent_cfg.load_run, agent_cfg.load_checkpoint)
-    #     print(f"[INFO]: Loading model checkpoint from: {resume_path}")
-
     # remove wandb dependence
-    resume_path = "/home/nima/whole_body_tracking/logs/rsl_rl/g1_flat/2025-12-18_22-31-48_smpl_extreme_filtered_0/model_29999.pt"
-    env_cfg.commands.motion.motion_file = "/home/nima/whole_body_tracking/motions/smpl_extreme_filtered_0.npz"
+    # resume_path = "/home/nima/whole_body_tracking/logs/rsl_rl/g1_flat/2025-12-18_22-31-48_smpl_extreme_filtered_0/model_29999.pt"
+    # env_cfg.commands.motion.motion_file = "/home/nima/whole_body_tracking/motions/smpl_extreme_filtered_0.npz"
+
+    # resume_path = "/home/nima/whole_body_tracking/logs/rsl_rl/g1_flat/2025-12-23_15-42-29_1pxH5qhrQ34_114166_114786_0_2_0_0_0_original/model_9000.pt"
+    # env_cfg.commands.motion.motion_file = "/home/nima/whole_body_tracking/motions/1pxH5qhrQ34_114166_114786_0_2_0_0_0_original.npz"
+
+    # get resume path and motion file from command line arguments
+    resume_path = args_cli.resume_path
+    env_cfg.commands.motion.motion_file = args_cli.motion_file
 
     # create isaac environment
     env = gym.make(args_cli.task, cfg=env_cfg, render_mode="rgb_array" if args_cli.video else None)
