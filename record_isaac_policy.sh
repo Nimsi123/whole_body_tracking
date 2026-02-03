@@ -1,17 +1,17 @@
-#!/usr/bin/env bash
+source ~/.holosoma_deps/miniconda3/bin/activate hssim
 set -euo pipefail
 
 # --------------------------
 # User config
 # --------------------------
 ROOT="/home/nima/whole_body_tracking/logs/rsl_rl/g1_flat"
-PATTERN="2025-12-22_21*_original"
+PATTERN="2026-*"
 MOTIONS_DIR="/home/nima/whole_body_tracking/motions"
 VIDEO_LENGTH=200                 # video length in steps (IsaacLab)
 TASK="Tracking-Flat-G1-v0"       # IsaacLab task name
 NUM_ENVS=2
 
-PLAY_SCRIPT="/home/nima/whole_body_tracking/scripts/rsl_rl/play.py"
+PLAY_SCRIPT="/home/nima/whole_body_tracking/scripts/rsl_rl/eval.py"
 OUTDIR="$HOME/whole_body_tracking/isaaclab_sweep_videos_$(date +%Y%m%d_%H%M%S)"
 CLIPDIR="$OUTDIR/clips"
 
