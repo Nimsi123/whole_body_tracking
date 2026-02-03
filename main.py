@@ -48,10 +48,16 @@ def run_task(motion_name, gpu_id):
         "--headless",
         "--logger", "wandb",
         "--log_project_name", "ttg",
-        "--run_name", motion_name,
+        "--run_name", motion_name
     ]
+
+    import time
+    import random
+
+    sleep_time = random.randint(0, 40)
+    print(f"[GPU {gpu_id}] Starting training for: {motion_name} with sleep time: {sleep_time}")
     
-    print(f"[GPU {gpu_id}] Starting training for: {motion_name}")
+    time.sleep(random.randint(0, 20))
     result = subprocess.run(
         cmd,
         env=env,
@@ -104,11 +110,12 @@ def discover_tasks(root_dir, num_workers, worker_split, delete_incomplete=False)
     all_tasks = sorted(all_tasks)
     print(f"Total tasks discovered: {len(all_tasks)}")
 
-    # Split tasks for distributed workers first
-    start_idx = int(len(all_tasks) * worker_split / num_workers)
-    end_idx = int(len(all_tasks) * (worker_split + 1) / num_workers)
-    task_slice = all_tasks[start_idx:end_idx]
-    print(f"Tasks for this worker split ({worker_split}/{num_workers}): {len(task_slice)}")
+    # # Split tasks for distributed workers first
+    # start_idx = int(len(all_tasks) * worker_split / num_workers)
+    # end_idx = int(len(all_tasks) * (worker_split + 1) / num_workers)
+    # task_slice = all_tasks[start_idx:end_idx]
+    # print(f"Tasks for this worker split ({worker_split}/{num_workers}): {len(task_slice)}")
+    task_slice = all_tasks
 
     return task_slice
 
@@ -132,6 +139,8 @@ def main(gpu_ids, workers_per_gpu, num_workers, worker_split):
     # Add sentinel values to signal workers to stop
     for _ in range(total_workers):
         task_queue.put(None)
+    # import sys
+    # sys.exit()
 
     processes = []
     for gpu in gpu_ids:
@@ -150,9 +159,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run parallel training across GPUs")
     parser.add_argument("--root_dir", default="/home/nima/whole_body_tracking/motions",
                         help="Root directory containing motion .npz files")
-    parser.add_argument("--gpu_ids", nargs='+', type=int, default=None,
+    parser.add_argument("--gpu_ids", nargs='+', type=int, default=[0],
                         help="List of GPU IDs to use (e.g., --gpu_ids 0 1 2)")
-    parser.add_argument("--workers_per_gpu", type=int, default=2,
+    parser.add_argument("--workers_per_gpu", type=int, default=1,
                         help="Number of worker processes per GPU")
     parser.add_argument("--num_workers", type=int, default=1,
                         help="Total number of distributed worker machines (for splitting work)")

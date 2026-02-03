@@ -34,8 +34,12 @@ conda activate beyondmimic
 # python scripts/csv_to_npz.py --input_file "/home/nima/whole_body_tracking/csvs/4deOUpU2sis_298361_298931_0_3_0_3_original.csv" --input_fps 30 --output_name smpl_extreme_filtered_0 --output_fps 50 --headless
 # python scripts/replay_npz.py --registry_name=ianc-uc-berkeley-org/wandb-registry-motions/smpl_extreme_filtered_0
 
-python scripts/csv_to_npz.py --input_file "/home/nima/whole_body_tracking/csvs/-_2U39bWx-k_43432_44112_1_2_1_1_0_original.csv" --input_fps 30 --output_name smpl_extreme_filtered_1 --output_fps 50 --headless
-python scripts/replay_npz.py --registry_name=ianc-uc-berkeley-org/wandb-registry-motions/smpl_extreme_filtered_1
+# python scripts/csv_to_npz.py --input_file "/home/nima/whole_body_tracking/csvs/-_2U39bWx-k_43432_44112_1_2_1_1_0_original.csv" --input_fps 30 --output_name smpl_extreme_filtered_1 --output_fps 50 --headless
+# python scripts/replay_npz.py --registry_name=ianc-uc-berkeley-org/wandb-registry-motions/smpl_extreme_filtered_1
+
+python scripts/csv_to_npz.py --input_file "/home/nima/whole_body_tracking/csvs/65ces61EZhM_182173_182778_0_1_2_8_0_original.csv" --input_fps 30 --output_name genmo_1 --output_fps 50 --headless
+python scripts/replay_npz.py --registry_name=ianc-uc-berkeley-org/wandb-registry-motions/genmo_1
+
 
 
 

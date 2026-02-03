@@ -26,12 +26,18 @@
 # --registry_name dummy_value \
 # --headless --log_project_name ttg --run_name test
 
-# # em3 test
-python scripts/rsl_rl/train.py --task=Tracking-Flat-G1-v0 \
---registry_name dummy_value \
---headless --logger wandb --log_project_name ttg --run_name _1iJLYMvSao_209591_210226_0_4_0_2_0_original
+# # # em3 test
+# python scripts/rsl_rl/train.py --task=Tracking-Flat-G1-v0 \
+# --registry_name dummy_value \
+# --headless --logger wandb --log_project_name ttg --run_name _1iJLYMvSao_209591_210226_0_4_0_2_0_original
 
 # em3 test
 # python scripts/rsl_rl/train.py --task=Tracking-Flat-G1-v0 \
 # --registry_name ianc-uc-berkeley-org/wandb-registry-motions/smpl_extreme_filtered_1 \
 # --headless --logger wandb --log_project_name ttg --run_name _1iJLYMvSao_209591_210226_0_4_0_2_0_original
+
+
+# genmo
+python scripts/rsl_rl/train.py --task=Tracking-Flat-G1-v0 \
+--registry_name dummy_value \
+--headless --logger wandb --log_project_name ttg --run_name 1pxH5qhrQ34_269464_270229_0_8_0_10_0_original
