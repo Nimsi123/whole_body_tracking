@@ -12,25 +12,6 @@ from whole_body_tracking.tasks.tracking.mdp.commands import MotionCommand
 if TYPE_CHECKING:
     from isaaclab.envs import ManagerBasedRLEnv
 
-
-upper_body_names = [
-            "pelvis",
-            "left_hip_roll_link",
-            "left_knee_link",
-            # "left_ankle_roll_link",
-            "right_hip_roll_link",
-            "right_knee_link",
-            # "right_ankle_roll_link",
-            "torso_link",
-            "left_shoulder_roll_link",
-            "left_elbow_link",
-            "left_wrist_yaw_link",
-            "right_shoulder_roll_link",
-            "right_elbow_link",
-            "right_wrist_yaw_link",
-        ]
-use_upper_body_names = False
-
 def _get_body_indexes(command: MotionCommand, body_names: list[str] | None) -> list[int]:
     return [i for i, name in enumerate(command.cfg.body_names) if (body_names is None) or (name in body_names)]
 
@@ -52,10 +33,7 @@ def motion_relative_body_position_error_exp(
 ) -> torch.Tensor:
     command: MotionCommand = env.command_manager.get_term(command_name)
     
-    if not use_upper_body_names:
-        body_indexes = _get_body_indexes(command, body_names)
-    else:
-        body_indexes = _get_body_indexes(command, upper_body_names)
+    body_indexes = _get_body_indexes(command, body_names)
     error = torch.sum(
         torch.square(command.body_pos_relative_w[:, body_indexes] - command.robot_body_pos_w[:, body_indexes]), dim=-1
     )
@@ -67,10 +45,7 @@ def motion_relative_body_orientation_error_exp(
 ) -> torch.Tensor:
     command: MotionCommand = env.command_manager.get_term(command_name)
 
-    if not use_upper_body_names:
-        body_indexes = _get_body_indexes(command, body_names)
-    else:
-        body_indexes = _get_body_indexes(command, upper_body_names)
+    body_indexes = _get_body_indexes(command, body_names)
     error = (
         quat_error_magnitude(command.body_quat_relative_w[:, body_indexes], command.robot_body_quat_w[:, body_indexes])
         ** 2
@@ -83,10 +58,7 @@ def motion_global_body_linear_velocity_error_exp(
 ) -> torch.Tensor:
     command: MotionCommand = env.command_manager.get_term(command_name)
 
-    if not use_upper_body_names:
-        body_indexes = _get_body_indexes(command, body_names)
-    else:
-        body_indexes = _get_body_indexes(command, upper_body_names)
+    body_indexes = _get_body_indexes(command, body_names)
     error = torch.sum(
         torch.square(command.body_lin_vel_w[:, body_indexes] - command.robot_body_lin_vel_w[:, body_indexes]), dim=-1
     )
@@ -98,10 +70,7 @@ def motion_global_body_angular_velocity_error_exp(
 ) -> torch.Tensor:
     command: MotionCommand = env.command_manager.get_term(command_name)
 
-    if not use_upper_body_names:
-        body_indexes = _get_body_indexes(command, body_names)
-    else:
-        body_indexes = _get_body_indexes(command, upper_body_names)
+    body_indexes = _get_body_indexes(command, body_names)
     error = torch.sum(
         torch.square(command.body_ang_vel_w[:, body_indexes] - command.robot_body_ang_vel_w[:, body_indexes]), dim=-1
     )

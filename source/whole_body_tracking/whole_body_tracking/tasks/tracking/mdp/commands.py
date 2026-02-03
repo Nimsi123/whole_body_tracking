@@ -97,6 +97,8 @@ class MotionCommand(CommandTerm):
         self.metrics["sampling_top1_prob"] = torch.zeros(self.num_envs, device=self.device)
         self.metrics["sampling_top1_bin"] = torch.zeros(self.num_envs, device=self.device)
 
+        self.evaluation = self.cfg.evaluation
+
     @property
     def command(self) -> torch.Tensor:  # TODO Consider again if this is the best observation
         return torch.cat([self.joint_pos, self.joint_vel], dim=1)
@@ -226,11 +228,15 @@ class MotionCommand(CommandTerm):
 
         sampled_bins = torch.multinomial(sampling_probabilities, len(env_ids), replacement=True)
 
-        self.time_steps[env_ids] = (
-            (sampled_bins + sample_uniform(0.0, 1.0, (len(env_ids),), device=self.device))
-            / self.bin_count
-            * (self.motion.time_step_total - 1)
-        ).long()
+        if self.evaluation:
+            self.time_steps[env_ids] = 0
+        else:
+            self.time_steps[env_ids] = (
+                (sampled_bins + sample_uniform(0.0, 1.0, (len(env_ids),), device=self.device))
+                / self.bin_count
+                * (self.motion.time_step_total - 1)
+            ).long()
+        
 
         # Metrics
         H = -(sampling_probabilities * (sampling_probabilities + 1e-12).log()).sum()
@@ -375,3 +381,5 @@ class MotionCommandCfg(CommandTermCfg):
 
     body_visualizer_cfg: VisualizationMarkersCfg = FRAME_MARKER_CFG.replace(prim_path="/Visuals/Command/pose")
     body_visualizer_cfg.markers["frame"].scale = (0.1, 0.1, 0.1)
+
+    evaluation: bool = False
