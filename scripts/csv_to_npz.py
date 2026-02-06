@@ -340,6 +340,27 @@ def main():
     sim.reset()
     # Now we are ready!
     print("[INFO]: Setup complete...")
+
+    # Debug: Check body count and indices for tracked bodies
+    robot = scene["robot"]
+    print(f"\n[DEBUG] Robot has {len(robot.body_names)} bodies")
+    print(f"[DEBUG] All body names with indices:")
+    for i, name in enumerate(robot.body_names):
+        print(f"  {i:2d}: {name}")
+    
+    # Check tracked body indices (from flat_env_cfg.py)
+    tracked = [
+        "pelvis", "left_hip_roll_link", "left_knee_link", "left_ankle_roll_link",
+        "right_hip_roll_link", "right_knee_link", "right_ankle_roll_link", "torso_link",
+        "left_shoulder_roll_link", "left_elbow_link", "left_wrist_yaw_link",
+        "right_shoulder_roll_link", "right_elbow_link", "right_wrist_yaw_link",
+    ]
+    indices, _ = robot.find_bodies(tracked, preserve_order=True)
+    print(f"\n[DEBUG] Tracked body indices (must all be < 40 for 40-body motion):")
+    for name, idx in zip(tracked, indices):
+        status = "OK" if idx < 40 else "!! OUT OF BOUNDS !!"
+        print(f"  {name}: {idx} {status}")
+
     # Run the simulator
     run_simulator(
         sim,
