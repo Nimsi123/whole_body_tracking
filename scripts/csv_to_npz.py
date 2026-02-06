@@ -239,7 +239,9 @@ def run_simulator(sim: sim_utils.SimulationContext, scene: InteractiveScene, joi
         "body_quat_w": [],
         "body_lin_vel_w": [],
         "body_ang_vel_w": [],
-        "body_names": list(robot.body_names),  # Store body names for cross-simulator compatibility
+        # Store names for cross-simulator compatibility (e.g., Isaac Lab -> MuJoCo)
+        "body_names": list(robot.body_names),
+        "joint_names": list(robot.joint_names),
     }
     file_saved = False
     # --------------------------------------------------------------------------
