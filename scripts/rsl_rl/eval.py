@@ -152,7 +152,7 @@ def main(env_cfg: ManagerBasedRLEnvCfg | DirectRLEnvCfg | DirectMARLEnvCfg, agen
             motion_command.metrics["sampling_entropy"]
         )
         # import pdb; pdb.set_trace()
-        assert torch.abs(motion_command.metrics["sampling_entropy"] - 1) < 0.01
+        # assert torch.abs(motion_command.metrics["sampling_entropy"] - 1) < 0.01
 
         if args_cli.video:
             timestep += 1

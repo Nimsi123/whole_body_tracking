@@ -1,15 +1,16 @@
-source ~/.holosoma_deps/miniconda3/bin/activate hssim
+# i think only works on white box
+conda activate beyondmimic
 set -euo pipefail
 
 # --------------------------
 # User config
 # --------------------------
 ROOT="/home/nima/whole_body_tracking/logs/rsl_rl/g1_flat"
-PATTERN="2026-*"
+PATTERN="2026-02-02*"
 MOTIONS_DIR="/home/nima/whole_body_tracking/motions"
-VIDEO_LENGTH=200                 # video length in steps (IsaacLab)
+VIDEO_LENGTH=600                 # video length in steps (IsaacLab)
 TASK="Tracking-Flat-G1-v0"       # IsaacLab task name
-NUM_ENVS=2
+NUM_ENVS=1
 
 PLAY_SCRIPT="/home/nima/whole_body_tracking/scripts/rsl_rl/eval.py"
 OUTDIR="$HOME/whole_body_tracking/isaaclab_sweep_videos_$(date +%Y%m%d_%H%M%S)"
